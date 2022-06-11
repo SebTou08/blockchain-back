@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable } from '@nestjs/common';
 import { Block } from './models/Block';
 import { Blockchain } from './models/Blockchain';
@@ -14,21 +15,15 @@ export class AppService {
   }
 
   createExampleBlockchain() {
-    const block = new Block({ data: 'Genesis Block' });
-    const block2 = new Block({ data: 'Block 2' });
-    const block3 = new Block({ data: 'Block 3' });
-    const block4 = new Block({ data: 'Block 4' });
-    const block5 = new Block({ data: 'Block 5' });
-
-    this._blockChain.addBlock(block);
-    this._blockChain.addBlock(block2);
-    this._blockChain.addBlock(block3);
-    this._blockChain.addBlock(block4);
-    this._blockChain.addBlock(block5);
+    if (this._blockChain.chain.length === 0) {
+      const block = new Block({ data: 'Genesis Block' });
+      this._blockChain.addBlock(block);
+    }
   }
 
-  createNewBlock(p_data: string) {
-    const block = new Block({ data: p_data });
+  createNewBlock(p_data: any) {
+    console.log('%c⧭', 'color: #00a3cc', p_data + ' for service');
+    const block = new Block(p_data);
     this._blockChain.addBlock(block);
   }
 }

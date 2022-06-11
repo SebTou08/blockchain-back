@@ -1,3 +1,4 @@
+/* eslint-disable */
 import sha256 from 'crypto-js/sha256';
 import hex2ascii from 'hex2ascii';
 
