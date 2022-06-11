@@ -12,7 +12,7 @@ export class Block {
   constructor(data: any) {
     this._hash = null;
     this._height = 0;
-    this._body = JSON.stringify(data).toString();
+    this._body = data;
     this._time = '';
     this._previousBlockHash = '';
   }
