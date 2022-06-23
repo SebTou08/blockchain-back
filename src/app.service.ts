@@ -1,6 +1,6 @@
 /* eslint-disable */
 import { Injectable } from '@nestjs/common';
-import { Block } from './models/Block';
+import { Block, ITransaction } from './models/Block';
 import { Blockchain } from './models/Blockchain';
 
 @Injectable()
@@ -16,7 +16,15 @@ export class AppService {
 
   createExampleBlockchain() {
     if (this._blockChain.chain.length === 0) {
-      const block = new Block({ data: 'Genesis Block' });
+      const genesisData: ITransaction = {
+        accountNumberTo: 'THIS IS GENEIS',
+        amount: 'This is genesis',
+        from: 'GENESIS',
+        to: 'Genesis',
+        cardDebited: 'GENESIS CARD',
+      };
+
+      const block = new Block(genesisData);
       this._blockChain.addBlock(block);
     }
   }

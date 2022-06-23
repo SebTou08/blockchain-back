@@ -1,6 +1,6 @@
 import sha256 = require('crypto-js/sha256');
 
-import { Block } from './Block';
+import { Block, ITransaction } from './Block';
 
 export class Blockchain {
   private _chain: any[];
@@ -13,8 +13,16 @@ export class Blockchain {
   }
 
   initializeChain() {
+    const genesisData: ITransaction = {
+      accountNumberTo: 'THIS IS GENEIS',
+      amount: 'This is genesis',
+      from: 'GENESIS',
+      to: 'Genesis',
+      cardDebited: 'GENESIS CARD',
+    };
+
     if (this._height === -1) {
-      const block = new Block({ data: 'Genesis Block' });
+      const block = new Block(genesisData);
       this.addBlock(block);
     }
   }
@@ -42,30 +50,6 @@ export class Blockchain {
 
   validateChain() {
     const errors = [];
-    /*return new Promise((resolve, reject) => {
-      if (this._chain.length === 0) {
-        errors.push('Chain is empty');
-        reject(errors);
-      }
-
-      this._chain.forEach((block, index) => {
-        if (index > 0) {
-          if (block.previousBlockHash !== this._chain[index - 1].hash) {
-            errors.push('Previous block hash is invalid');
-          }
-        }
-
-        if (block.hash !== sha256(JSON.stringify(block)).toString()) {
-          errors.push('Block hash is invalid');
-        }
-      });
-
-      if (errors.length > 0) {
-        reject(errors);
-      }
-      resolve(errors);
-    });*/
-
     this._chain.map((block: Block) => {
       try {
         const isValid = block.validate();

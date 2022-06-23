@@ -2,14 +2,22 @@
 import sha256 from 'crypto-js/sha256';
 import hex2ascii from 'hex2ascii';
 
+export interface ITransaction {
+  from: string;
+  to: string;
+  amount: string;
+  cardDebited: string;
+  accountNumberTo: string;
+}
+
 export class Block {
   private _hash: any;
   private _height: number;
-  private _body: any;
+  private _body: ITransaction;
   private _time: string;
   private _previousBlockHash: any;
 
-  constructor(data: any) {
+  constructor(data: ITransaction) {
     this._hash = null;
     this._height = 0;
     this._body = data;
@@ -26,7 +34,7 @@ export class Block {
   }
 
   getBlockData() {
-    const encodedData = this._body.toString('hex');
+    const encodedData = this._body.toString();
     const decodedData = hex2ascii(encodedData);
     const dataObject = JSON.parse(decodedData);
 
