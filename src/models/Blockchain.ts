@@ -12,6 +12,9 @@ export class Blockchain {
     this.initializeChain();
   }
 
+/**
+ * If the blockchain is empty, create a new block with the genesis data and add it to the blockchain
+ */
   initializeChain() {
     const genesisData: ITransaction = {
       accountNumberTo: 'THIS IS GENEIS',
@@ -27,6 +30,11 @@ export class Blockchain {
     }
   }
 
+/**
+ * It adds a new block to the blockchain
+ * @param {Block} newBlock - Block - The new block to be added to the chain.
+ * @returns The new block is being returned.
+ */
   addBlock(newBlock: Block) {
     newBlock.height = this._chain.length;
     newBlock.time = new Date().getTime().toString();
@@ -48,6 +56,10 @@ export class Blockchain {
     return newBlock;
   }
 
+/**
+ * It loops through the chain and validates each block
+ * @returns An array of errors.
+ */
   validateChain() {
     const errors = [];
     this._chain.map((block: Block) => {
@@ -63,6 +75,9 @@ export class Blockchain {
     return errors;
   }
 
+/**
+ * It loops through the blockchain and logs each block to the console
+ */
   logger() {
     this._chain.forEach((block) => {
       console.log(block.toString());

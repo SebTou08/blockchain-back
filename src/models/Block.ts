@@ -26,11 +26,11 @@ export class Block {
   }
 
   validate() {
-    return true;
-    /*const currentHash = this._hash;
+    //return true;
+    const currentHash = this._hash;
     this._hash = sha256(JSON.stringify({ ...this, hash: null })).toString();
     console.log('-> currentHash', currentHash, this._hash);
-    return currentHash === this._hash;*/
+    return currentHash === this._hash;
   }
 
   getBlockData() {
