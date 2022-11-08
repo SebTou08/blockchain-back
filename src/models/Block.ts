@@ -17,6 +17,7 @@ export class Block {
   private _time: string;
   private _previousBlockHash: any;
 
+  
   constructor(data: ITransaction) {
     this._hash = null;
     this._height = 0;
